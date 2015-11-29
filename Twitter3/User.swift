@@ -16,7 +16,8 @@ let userDidLogoutNotification = "userDidLogoutNotification"
 class User: NSObject {
     var name: String?
     var screenname: String?
-    var profileImageURL: String?
+    //var profileImageURL: String?
+    var profileImageUrl: NSURL
     var tagline: String?
     var dictionary: NSDictionary
     
@@ -25,7 +26,10 @@ class User: NSObject {
         
         name = dictionary["name"] as? String
         screenname = dictionary["screen_name"] as? String
-        profileImageURL = dictionary["profile_image_url"] as? String
+        //profileImageURL = dictionary["profile_image_url"] as? String
+        //profileImageUrl = NSURL(string: (dictionary["profile_image_url"] as! String).stringByReplacingOccurrencesOfString("_normal", withString: "_bigger", options: [], range: nil))!
+        profileImageUrl = NSURL(string: (dictionary["profile_image_url"] as! String).stringByReplacingOccurrencesOfString("_normal", withString: "_bigger"))!
+       // profileImageU = NSURL(string: (dictionary["profile_image_url"] as! String).stringByReplacingOccurrencesOfString("_normal", withString: "_bigger"))
         tagline = dictionary["description"] as? String
     }
     
@@ -33,7 +37,8 @@ class User: NSObject {
         User.currentUser = nil
         TwitterClient.sharedInstance.requestSerializer.removeAccessToken()
         
-        NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)    }
+        NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+    }
     
     class var currentUser: User? {
         get {
@@ -47,7 +52,6 @@ class User: NSObject {
                     } catch {
                         print("json object with data error")
                     }
-        
         
                 }
             }
