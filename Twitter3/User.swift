@@ -29,7 +29,7 @@ class User: NSObject {
         //profileImageURL = dictionary["profile_image_url"] as? String
         //profileImageUrl = NSURL(string: (dictionary["profile_image_url"] as! String).stringByReplacingOccurrencesOfString("_normal", withString: "_bigger", options: [], range: nil))!
         profileImageUrl = NSURL(string: (dictionary["profile_image_url"] as! String).stringByReplacingOccurrencesOfString("_normal", withString: "_bigger"))!
-       // profileImageU = NSURL(string: (dictionary["profile_image_url"] as! String).stringByReplacingOccurrencesOfString("_normal", withString: "_bigger"))
+       
         tagline = dictionary["description"] as? String
     }
     

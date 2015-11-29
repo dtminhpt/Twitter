@@ -26,12 +26,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             
         }
         loadTweets()
-        
-        /*TwitterClient.sharedInstance.homeTimeLineWithParams(nil, completion: { (tweets, error) -> () in
-            self.tweets = tweets
-        })*/
-
     }
+    
     func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -81,31 +77,39 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
 
-       
+    
+    @IBAction func onThoat(sender: AnyObject) {
+        print("logout")
+        
+        User.currentUser?.logout()
+    }
+    
+    
     @IBAction func onLogout(sender: AnyObject) {
         print("logout")
         
         User.currentUser?.logout()
-
     }
+    
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetTableViewCell
         cell.tweet = self.tweets?[indexPath.row]
-        
-        
-        
-        print("Thuc hien load cell ")
-        
         return cell
-        
-    }
+   }
     
     //Chon 1 row trong table -> hien thi chi tiet row do / goi viewcontroller khac bang lenh
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
             let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let controller = storyboard.instantiateViewControllerWithIdentifier("TweetView") as! TweetDetailViewController
         
-            //controller
+            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("TweetView") as! TweetDetailViewController
+       
+        
+            controller.tweet = self.tweets![indexPath.row]
+            self.navigationController?.pushViewController(controller, animated: true)
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+           // print("Thuc hien select row ")
     }
     
     

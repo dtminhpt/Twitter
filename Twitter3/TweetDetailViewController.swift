@@ -24,6 +24,26 @@ class TweetDetailViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.navigationItem.title = "Tweet"
+        
+        self.profileImage.setImageWithURL((self.tweet?.user?.profileImageUrl)!)
+        self.profileImage.layer.cornerRadius = 9.0
+        self.profileImage.layer.masksToBounds = true
+        self.nameLabel.text = self.tweet?.user?.name
+        //self.screennameLabel.text = "@\(self.tweet?.user?.screenname)"
+        self.screennameLabel.text = "@" + (self.tweet?.user?.screenname)!
+
+        self.tweetTextLabel.text = self.tweet?.text
+        
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "MMMM dd yyyy 'at' h:mm aaa"
+        self.dateLabel.text = formatter.stringFromDate(self.tweet!.createdAt!)
+        
+        self.retweetNumberLabel.text = "\((self.tweet!.numberOfRetweets)!)"
+        self.favoriteNumberLabel.text = "\((self.tweet!.numberOfFavorites)!)"
+        
+        print("So reweet\(self.tweet?.numberOfRetweets)")
     }
 
     override func didReceiveMemoryWarning() {

@@ -22,7 +22,8 @@ class TweetTableViewCell: UITableViewCell {
         willSet(newValue){
             self.profileImage.setImageWithURL((newValue?.user?.profileImageUrl)!)
             self.nameLabel.text = newValue?.user?.name
-            self.screennameLabel.text = "@\(newValue!.user!.screenname)"
+            //self.screennameLabel.text = "@\(newValue!.user!.screenname)"
+            self.screennameLabel.text = "@" + (newValue?.user?.screenname)!
             self.tweetTextLabel.text = newValue?.text
             self.timeLabel.text = newValue?.createdAt?.timeAgo()
         }
@@ -35,7 +36,7 @@ class TweetTableViewCell: UITableViewCell {
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
-       // super.setSelected(selected, animated: animated)
+        super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
