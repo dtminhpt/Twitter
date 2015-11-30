@@ -99,7 +99,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
    }
     
     //Chon 1 row trong table -> hien thi chi tiet row do / goi viewcontroller khac bang lenh
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
             let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         
             let controller = self.storyboard?.instantiateViewControllerWithIdentifier("TweetView") as! TweetDetailViewController
