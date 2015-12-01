@@ -35,8 +35,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         //Dynamic cell
         tableView.estimatedRowHeight = 200
-        //tableView.rowHeight = UITableViewAutomaticDimension
-            }
+        tableView.rowHeight = UITableViewAutomaticDimension
+    }
     
     override func viewDidAppear(animated: Bool) {
         self.tableView.addPullToRefreshWithActionHandler { () -> Void in
@@ -54,11 +54,15 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             
             //pull to refresh-> keo xong roi thi ngung: khong load mai
             if self.tableView.pullToRefreshView != nil {
-                self.tableView.pullToRefreshView.stopAnimating()
+            self.tableView.pullToRefreshView.stopAnimating()
+                //tableView.showsPullToRefresh = NO;
+               //self.tableView.showsPullToRefresh = false
+            self.tableView.pullToRefreshView.hidden = false
+                
             }
             
             self.tweets = tweets
-           // self.tableView.reloadData()
+            self.tableView.reloadData()
             
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -77,13 +81,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
 
-    
-    @IBAction func onThoat(sender: AnyObject) {
-        print("logout")
-        
-        User.currentUser?.logout()
-    }
-    
     
     @IBAction func onLogout(sender: AnyObject) {
         print("logout")
@@ -107,15 +104,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
             controller.tweet = self.tweets![indexPath.row]
             self.navigationController?.pushViewController(controller, animated: true)
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-           // print("Thuc hien select row ")
+           // tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print(tweets!.count)
-
         return self.tweets?.count ?? 0
         
     }

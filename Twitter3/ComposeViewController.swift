@@ -23,6 +23,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.textView.delegate = self
+        
         self.profileImage.setImageWithURL((User.currentUser?.profileImageUrl)!)
         self.profileImage.layer.cornerRadius = 9.0
         self.profileImage.layer.masksToBounds = true
@@ -51,15 +53,28 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     override func viewDidLayoutSubviews() {
         self.adjustScrollViewContentSize()
     }
+    func countElements(str: String) () -> Int
+    {
+        return str.characters.count
+    }
+    
     
     
     func textViewDidChange(textView: UITextView) {
-        let tweet = textView.text
+
+        let status = textView.text
         
-        //let charactersRemaining = MAX_CHARACTERS_ALLOWED - countElements(tweet)
+        let charactersRemaining = MAX_CHARACTERS_ALLOWED - countElements(status)()
         
-       // self.remainingCharacterLabel.text = "\(charatersRemaining)"
-        //self.remainingCharacterLabel.textColor = charactersRemaining >= 0 ? .lightGrayColor() : .reColor()
+        self.remainingCharacterLabel.text = "\(charactersRemaining)"
+        
+        /*if charactersRemaining >= 0{
+            self.remainingCharacterLabel.textColor = UIColor.lightGrayColor()
+        } else {
+            self.remainingCharacterLabel.textColor = UIColor.redColor()
+        }*/
+        
+        self.remainingCharacterLabel.textColor = charactersRemaining >= 0 ? UIColor.lightGrayColor() : UIColor.redColor()
         self.adjustScrollViewContentSize()
     }
     func adjustScrollViewContentSize() {
@@ -79,23 +94,28 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     
     @IBAction func onTweetTap(sender: AnyObject) {
-        let tweet = self.textView.text
+        //let tweet = self.textView.text
+        let status = self.textView.text
+        //let status = "Xin chao"
         
-       // if (countElements(status) == 0) {
-         //   return
-        //}
+        print(countElements(status)())
+        if (countElements(status)() == 0) {
+            return
+        }
     
-        let params: NSDictionary = ["tweet": tweet]
+        //let params: NSDictionary = ["tweet": tweet]
+        let params: NSDictionary = ["status": status]
+
         
-        TwitterClient.sharedInstance.postTweetUpdateWithParams(params, completion: { (tweet, error) -> () in
+        TwitterClient.sharedInstance.postTweetUpdateWithParams(params, completion: { (status, error) -> () in
             if error != nil {
-                print("error posting tweet:\(error)")
+                print("error posting status:\(error)")
                 return
             }
-            NSNotificationCenter.defaultCenter().postNotificationName(TwitterEvents.StatusPosted, object: tweet)
+            NSNotificationCenter.defaultCenter().postNotificationName(TwitterEvents.StatusPosted, object: status)
             self.dismissViewControllerAnimated(true, completion: nil)
         })
-        print("tap Tweet")
+        //print("tap Tweet")
     }
     /*
     // MARK: - Navigation
@@ -108,3 +128,4 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     */
 
 }
+
