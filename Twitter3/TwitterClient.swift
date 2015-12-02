@@ -92,11 +92,10 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 completion(tweet: nil, error: error)
         })
     }
-    //1.1/statuses/retweet/:id.json
-    //1.1/statuses/reweet/\(id).json
+    
     
     func retweet(id: String, completion: (tweet: Tweet?, error: NSError?) -> ()) {
-        POST("1.1/statuses/retweet/:id.json", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+        POST("1.1/statuses/retweet/\(id).json", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             let tweet = Tweet(dictionary: response as! NSDictionary)
             print("retweet thanh cong")
@@ -104,6 +103,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("error reweetting tweet update")
+                print(error)
                 
                 completion(tweet: nil, error: error)
         })
@@ -169,6 +169,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("error unfavorating tweet update")
+                print(error)
                 
                 completion(tweet: nil, error: error)
         })

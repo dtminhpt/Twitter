@@ -86,7 +86,7 @@ class TweetTableViewCell: UITableViewCell {
         //let tweet = Tweet(dictionary: response as! NSDictionary)
         if let tweet = tweet {
             print(tweet.id!)
-            print(tweet.user?.screenname)
+            print((tweet.user?.screenname)!)
             TwitterClient.sharedInstance.retweet(tweet.id!) { (tweet, error) -> () in
                 if error == nil {
                     //let dic = Dictionary(tweet: Tweet as! Tweet)
