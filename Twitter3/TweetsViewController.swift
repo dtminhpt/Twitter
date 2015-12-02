@@ -142,7 +142,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
               
                 //let tweet = sender as! Tweet
                 
-                tweetReply.targetUserName = "@\(temptweet!.user?.screenname)"
+                
+                tweetReply.targetUserName = "@" + (User.currentUser!.screenname)!//"@\(temptweet!.user?.screenname)"
+               //self.screennameLabel.text = "@" + (User.currentUser!.screenname)!
+
                 
                 tweetReply.id = temptweet!.id!
                

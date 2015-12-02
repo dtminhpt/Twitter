@@ -419,7 +419,7 @@
         <!--Reply View Controller-->
         <scene sceneID="gZs-tb-QVk">
             <objects>
-                <viewController id="hh3-c1-at8" customClass="ReplyViewController" customModule="Twitter3" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="hh3-c1-at8" customClass="ReplyViewController" customModule="Twitter3" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yEi-7w-1WW"/>
                         <viewControllerLayoutGuide type="bottom" id="cDr-2L-hog"/>
@@ -461,9 +461,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="8OU-FW-nKv">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="YIA-4J-sRB">
                             <connections>
-                                <action selector="onCancelTap:" destination="2Y3-21-yH7" id="WUE-4H-mCb"/>
+                                <action selector="onCancelTap:" destination="hh3-c1-at8" id="45o-gC-xCv"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
@@ -472,8 +473,8 @@
                                     <action selector="onReply:" destination="hh3-c1-at8" id="EPH-8D-0zy"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="Bpo-Gs-KXh">
-                                <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="6GI-Wp-75M">
+                            <barButtonItem style="plain" id="owt-Sn-HuN">
+                                <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="cpP-Ud-EaJ">
                                     <rect key="frame" x="190" y="7" width="71" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -485,7 +486,7 @@
                     <connections>
                         <outlet property="nameLabel" destination="lA5-TX-9gf" id="wbp-3d-jXb"/>
                         <outlet property="profileImage" destination="ebd-nn-ijA" id="lfY-Tb-xyI"/>
-                        <outlet property="remainingCharacterLabel" destination="Bpo-Gs-KXh" id="X3K-rA-b1e"/>
+                        <outlet property="remainingCharacterLabel" destination="cpP-Ud-EaJ" id="MtD-E6-pan"/>
                         <outlet property="screennameLabel" destination="Jqa-Or-6iD" id="8YO-oa-jmD"/>
                         <outlet property="scrollView" destination="MQE-ly-3Zi" id="Gfm-gB-27C"/>
                         <outlet property="textView" destination="Vrp-ey-KNd" id="zCz-Cm-P8f"/>

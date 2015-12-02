@@ -37,6 +37,8 @@ class Tweet: NSObject {
         
         self.numberOfFavorites = dictionary["favorite_count"] as? Int
         self.numberOfRetweets = dictionary["retweet_count"] as? Int
+        self.favorited = dictionary["favorited"] as! Bool
+        self.reweeted = dictionary["favorited"] as! Bool
         
         if dictionary["reweeted_status"] != nil {
             let reweetUser = User(dictionary: dictionary["user"] as! NSDictionary)
@@ -59,5 +61,16 @@ class Tweet: NSObject {
         }
         
         return tweets
+    }
+    func updateFromDic(dic: NSDictionary) {
+        let tweet = Tweet(dictionary: dic)
+        self.id = tweet.id
+        self.user = tweet.user
+        self.text = tweet.text
+        
+        self.numberOfRetweets = tweet.numberOfRetweets
+        self.numberOfFavorites = tweet.numberOfFavorites
+        self.reweeted = tweet.reweeted
+        self.favorited = tweet.favorited
     }
 }

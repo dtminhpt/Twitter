@@ -25,7 +25,7 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         @IBOutlet weak var screennameLabel: UILabel!
         //@IBOutlet weak var remainingCharacterLabel1: UILabel!
         
-    @IBOutlet weak var remainingCharacterLabel: UITextField!
+        @IBOutlet weak var remainingCharacterLabel: UITextField!
         //@IBOutlet weak var remainingCharacterLabel: UITextField!
         override func viewDidLoad() {
             super.viewDidLoad()
