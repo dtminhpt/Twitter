@@ -92,9 +92,11 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 completion(tweet: nil, error: error)
         })
     }
+    //1.1/statuses/retweet/:id.json
+    //1.1/statuses/reweet/\(id).json
     
     func retweet(id: String, completion: (tweet: Tweet?, error: NSError?) -> ()) {
-        POST("1.1/statuses/reweet/\(id).json", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+        POST("1.1/statuses/retweet/:id.json", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             let tweet = Tweet(dictionary: response as! NSDictionary)
             print("retweet thanh cong")
@@ -107,6 +109,72 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
         })
     }
     
+    func unretweet(id: String, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        POST("1.1/statuses/reweet/\(id).json?include_my_request=1", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            
+            let tweet = Tweet(dictionary: response as! NSDictionary)
+            print("unretweet thanh cong")
+            completion(tweet: tweet, error: nil)
+            
+            if
+            let dic = response as? NSDictionary,
+            let current_user_reweet = dic["current_user_reweet"],
+            let reweet_id = current_user_reweet["id_str"]
+            {
+                //1.1/statuses/destroy/:id.json
+                TwitterClient.sharedInstance.POST("1.1/statuses/destroy/\(reweet_id!).json", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+                    
+                    let tweet = Tweet(dictionary: response as! NSDictionary)
+                    print("unretweet thanh cong")
+                    completion(tweet: tweet, error: nil)
+                    
+                    }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                        print("error unreweetting tweet update")
+                        
+                        completion(tweet: nil, error: error)
+                })
+            }
+            
+            }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("error reweetting tweet update")
+                
+                completion(tweet: nil, error: error)
+        })
+    }
+
+    func favorite(id: String, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        
+        let params = ["id": id]
+        POST("1.1/favorites/create.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            
+            let tweet = Tweet(dictionary: response as! NSDictionary)
+            print("favorite thanh cong")
+            completion(tweet: tweet, error: nil)
+            
+            }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("error favorating tweet update")
+                
+                completion(tweet: nil, error: error)
+        })
+    }
+    
+    func unfavorite(id: String, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        
+        let params = ["id": id]
+        POST("1.1/favorites/destroy.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+            
+            let tweet = Tweet(dictionary: response as! NSDictionary)
+            print("unfavorite thanh cong")
+            completion(tweet: tweet, error: nil)
+            
+            }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+                print("error unfavorating tweet update")
+                
+                completion(tweet: nil, error: error)
+        })
+    }
+
+
     func openURL(url: NSURL) {
         
             fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query) , success: { (accessToken: BDBOAuth1Credential!) -> Void in

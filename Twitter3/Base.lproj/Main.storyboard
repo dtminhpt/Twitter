@@ -82,6 +82,9 @@
                                                     <state key="normal" title="Favorite">
                                                         <color key="titleColor" red="0.6420053697421122" green="0.65140389659022635" blue="0.69951467803030298" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onFavorite:" destination="dB4-PI-8uS" eventType="touchUpInside" id="HoY-dZ-VTD"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkQ-L8-11H">
                                                     <rect key="frame" x="114" y="91" width="56" height="30"/>
@@ -89,6 +92,9 @@
                                                     <state key="normal" title="Retweet">
                                                         <color key="titleColor" red="0.6420053697421122" green="0.65140389659022635" blue="0.69951467803030298" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onReweet:" destination="dB4-PI-8uS" eventType="touchUpInside" id="fhS-Wm-uOc"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3b-Z0-bFz">
                                                     <rect key="frame" x="261" y="5" width="30" height="16"/>

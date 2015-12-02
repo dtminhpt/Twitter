@@ -27,6 +27,7 @@ class TweetTableViewCell: UITableViewCell {
     
     var delegate:TweetTableViewCellDelegate?
     
+    
     var tweet: Tweet? {
         willSet(newValue){
             self.tweet = newValue
@@ -39,18 +40,29 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
    // var tweet: Tweet?
-   /* func updateUI(tweet: Tweet) {
+    func updateUI(tweet: Tweet) {
         self.tweet = tweet
         //self.profileImage.setImageWithURL((tweet.user?.profileImageUrl)!)
         self.profileImage.setImageWithURL((tweet.user?.profileImageUrl)!)
         //self.profileImage.setImageWithURL(NSURL(string: (tweet.user?.profileImageUrl)!)!)
         self.nameLabel.text = tweet.user?.name
+        
         //self.screennameLabel.text = "@\(newValue!.user!.screenname)"
         self.screennameLabel.text = "@" + (tweet.user?.screenname)!
         self.tweetTextLabel.text = tweet.text
         self.timeLabel.text = tweet.createdAt?.timeAgo()
         
-    }*/
+        self.reweetButton.enabled = tweet.user?.screenname! != User.currentUser!.screenname
+        //self.updateImage()
+        
+        
+    }
+    
+   /* func updateImage() {
+        self.favoriteButton.setImage(UIImage(named: tweet!.favorited ? "like-action-on" : "like-action"), forState: UIControlState.Normal)
+        self.reweetButton.setImage(UIImage(named: tweet!.reweeted ? "reweet-action-on" : "reweet-action"), forState: UIControlState.Normal)
+       }*/
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -69,4 +81,63 @@ class TweetTableViewCell: UITableViewCell {
         delegate?.tweetTableViewCell(self, replyTo: self.tweet!)
     }
     
+    @IBAction func onReweet(sender: AnyObject) {
+        
+        //let tweet = Tweet(dictionary: response as! NSDictionary)
+        if let tweet = tweet {
+            print(tweet.id!)
+            print(tweet.user?.screenname)
+            TwitterClient.sharedInstance.retweet(tweet.id!) { (tweet, error) -> () in
+                if error == nil {
+                    //let dic = Dictionary(tweet: Tweet as! Tweet)
+                    self.tweet?.updateFromDic(tweet!)
+                    self.updateUI(self.tweet!)
+                    
+                }
+            }
+        } else {
+            //unweet
+            TwitterClient.sharedInstance.unretweet(tweet!.id!) { (tweet, error) -> () in
+                if error == nil {
+                    //let dic = Dictionary(tweet: Tweet as! Tweet)
+                    self.tweet?.updateFromDic(tweet!)
+                    //self.updateUI(tweet!)
+                    self.tweet?.numberOfRetweets  = (self.tweet?.numberOfRetweets)! - 1
+                    if self.tweet?.numberOfRetweets < 0 {
+                        self.tweet?.numberOfRetweets = 0
+                    }
+                    self.tweet?.reweeted = false
+                    self.updateUI(self.tweet!)
+                    
+                }
+            }
+        }
+    }
+    
+    @IBAction func onFavorite(sender: AnyObject) {
+        if let tweet = tweet {
+            if tweet.favorited == false {
+                TwitterClient.sharedInstance.favorite(tweet.id!) { (tweet, error) -> () in
+                    if error == nil {
+                        //let dic = Dictionary(tweet: Tweet as! Tweet)
+                        self.tweet?.updateFromDic(tweet!)
+                        self.updateUI(self.tweet!)
+                        
+                    }
+                }
+            } else {
+                //unfavorite
+                TwitterClient.sharedInstance.unfavorite(tweet.id!) { (tweet, error) -> () in
+                    if error == nil {
+                        //let dic = Dictionary(tweet: Tweet as! Tweet)
+                        self.tweet?.updateFromDic(tweet!)
+                        self.updateUI(self.tweet!)
+                        
+                    }
+                }
+            }
+            
+        }
+
+    }
 }
