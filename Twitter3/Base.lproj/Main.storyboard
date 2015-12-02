@@ -113,6 +113,10 @@
                                                     <state key="normal" title="Reply">
                                                         <color key="titleColor" red="0.6420053697421122" green="0.65140389659022635" blue="0.69951467803030298" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onReply:" destination="dB4-PI-8uS" eventType="touchUpInside" id="rl6-67-f5O"/>
+                                                        <segue destination="cbM-gt-JQS" kind="modal" identifier="TweetReply" id="yhS-17-hBY"/>
+                                                    </connections>
                                                 </button>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="716-zg-9Pj">
                                                     <rect key="frame" x="61" y="27" width="226" height="56"/>
@@ -147,8 +151,11 @@
                                         </tableViewCellContentView>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <connections>
+                                            <outlet property="favoriteButton" destination="djk-bl-LBG" id="mj2-ze-UOy"/>
                                             <outlet property="nameLabel" destination="6Wh-46-BOA" id="xr0-td-YyZ"/>
                                             <outlet property="profileImage" destination="WFX-Cc-e3q" id="5mM-ab-5hr"/>
+                                            <outlet property="replyButton" destination="Clj-Ma-wJA" id="RPj-Ib-nX8"/>
+                                            <outlet property="reweetButton" destination="TkQ-L8-11H" id="e9P-c1-hhS"/>
                                             <outlet property="screennameLabel" destination="OzC-8u-zVc" id="sTU-Ta-po5"/>
                                             <outlet property="timeLabel" destination="C3b-Z0-bFz" id="pLi-HO-fpN"/>
                                             <outlet property="tweetTextLabel" destination="716-zg-9Pj" id="wcN-Xb-iQd"/>
@@ -370,7 +377,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qKW-Fs-c42" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1058" y="928"/>
+            <point key="canvasLocation" x="694" y="917"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YDR-Fy-YxJ">
@@ -408,6 +415,103 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rxc-6E-chW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1391" y="295"/>
+        </scene>
+        <!--Reply View Controller-->
+        <scene sceneID="gZs-tb-QVk">
+            <objects>
+                <viewController id="hh3-c1-at8" customClass="ReplyViewController" customModule="Twitter3" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yEi-7w-1WW"/>
+                        <viewControllerLayoutGuide type="bottom" id="cDr-2L-hog"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3EB-LH-PLi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQE-ly-3Zi">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ebd-nn-ijA">
+                                        <rect key="frame" x="8" y="8" width="52" height="52"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="GJY-to-Yje"/>
+                                            <constraint firstAttribute="width" constant="52" id="wKr-WJ-dRa"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Screenname Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jqa-Or-6iD">
+                                        <rect key="frame" x="68" y="26" width="132" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                        <color key="textColor" red="0.60801373110000001" green="0.60801373110000001" blue="0.60801373110000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lA5-TX-9gf">
+                                        <rect key="frame" x="68" y="10" width="110" height="21"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vrp-ey-KNd">
+                                        <rect key="frame" x="8" y="68" width="304" height="113"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8OU-FW-nKv">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YIA-4J-sRB">
+                            <connections>
+                                <action selector="onCancelTap:" destination="2Y3-21-yH7" id="WUE-4H-mCb"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Reply" id="sS1-IM-vfD">
+                                <connections>
+                                    <action selector="onReply:" destination="hh3-c1-at8" id="EPH-8D-0zy"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="Bpo-Gs-KXh">
+                                <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="6GI-Wp-75M">
+                                    <rect key="frame" x="190" y="7" width="71" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nameLabel" destination="lA5-TX-9gf" id="wbp-3d-jXb"/>
+                        <outlet property="profileImage" destination="ebd-nn-ijA" id="lfY-Tb-xyI"/>
+                        <outlet property="remainingCharacterLabel" destination="Bpo-Gs-KXh" id="X3K-rA-b1e"/>
+                        <outlet property="screennameLabel" destination="Jqa-Or-6iD" id="8YO-oa-jmD"/>
+                        <outlet property="scrollView" destination="MQE-ly-3Zi" id="Gfm-gB-27C"/>
+                        <outlet property="textView" destination="Vrp-ey-KNd" id="zCz-Cm-P8f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ugu-tE-lnq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1923" y="969"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7D1-4j-RP5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cbM-gt-JQS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Hk-eY-6bk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hh3-c1-at8" kind="relationship" relationship="rootViewController" id="HEr-Fb-uT0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4J3-BU-KIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1391" y="969"/>
         </scene>
     </scenes>
 </document>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet weak var tableView: UITableView!
     var tweets: [Tweet]?
@@ -90,10 +90,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetTableViewCell
+        //let cell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell") as! TweetTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath)  as! TweetTableViewCell
         cell.tweet = self.tweets?[indexPath.row]
+        cell.delegate = self
         return cell
-   }
+        
+    }
     
     //Chon 1 row trong table -> hien thi chi tiet row do / goi viewcontroller khac bang lenh
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -104,7 +107,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
             controller.tweet = self.tweets![indexPath.row]
             self.navigationController?.pushViewController(controller, animated: true)
-           // tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
     }
     
     
@@ -130,5 +133,45 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+   
+         if  let navigationController = segue.destinationViewController as? UINavigationController {
+            if let tweetReply = navigationController.topViewController as? ReplyViewController {
+              
+                let tweet = sender as! Tweet
+                
+                tweetReply.targetUserName = "@\(tweet.user?.screenname)"
+                
+                tweetReply.id = tweet.id!
+               
+           }
+        }
+    }
+    
 }
+
+extension   TweetsViewController: TweetTableViewCellDelegate {
+    //TweetTableViewCellDelegate
+    func tweetTableViewCell(tweetTableViewCell: TweetTableViewCell, replyTo tweet: Tweet) {
+        
+        self.performSegueWithIdentifier("TweetReply", sender: tweet)
+        
+    }
+    
+}
+
+/*extension TweetsViewController:ReplyViewControllerDelegate {
+    
+    func replyView(replyViewController: ReplyViewController, response: NSDictionary?) {
+        if response != nil {
+            self.tweets?.insert(Tweet(dictionary: response!), atIndex: 0)
+            
+            self.tableView.reloadData()
+        }
+    }
+    
+}*/
+
+
+
