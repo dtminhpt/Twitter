@@ -56,8 +56,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             //pull to refresh-> keo xong roi thi ngung: khong load mai
             if self.tableView.pullToRefreshView != nil {
             self.tableView.pullToRefreshView.stopAnimating()
-                //tableView.showsPullToRefresh = NO;
-               //self.tableView.showsPullToRefresh = false
+                
             self.tableView.pullToRefreshView.hidden = false
                 
             }
@@ -141,11 +140,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             if let tweetReply = navigationController.topViewController as? ReplyViewController {
               
                 //let tweet = sender as! Tweet
-                
-                
-                tweetReply.targetUserName = "@" + (User.currentUser!.screenname)!//"@\(temptweet!.user?.screenname)"
-               //self.screennameLabel.text = "@" + (User.currentUser!.screenname)!
-
+                tweetReply.targetUserName = "@" + (temptweet!.user?.screenname)!//"@\(temptweet!.user?.screenname)"
                 
                 tweetReply.id = temptweet!.id!
                

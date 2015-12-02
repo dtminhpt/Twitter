@@ -122,7 +122,7 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
                 NSNotificationCenter.defaultCenter().postNotificationName(TwitterEvents.StatusPosted, object: status)
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
-            //print("tap Tweet")
+        
         }
         /*
         // MARK: - Navigation
