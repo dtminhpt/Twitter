@@ -28,7 +28,8 @@ class Tweet: NSObject {
         user = User(dictionary: dictionary["user"] as! NSDictionary)
         text = dictionary["text"] as? String
         createdAtString = dictionary["created_at"] as? String
-        id = dictionary["id"] as? String
+        id = dictionary["id_str"] as? String
+      
         
         let formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
@@ -46,7 +47,7 @@ class Tweet: NSObject {
         }
         //self.id = "\(dic["id"]!)"
         //self.id =  "\(dictionary["id"]!)"
-        id = dictionary["id"] as? String
+        //id = dictionary["id"] as? String
         
     }
     

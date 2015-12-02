@@ -52,14 +52,26 @@ class TweetDetailViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+    
+                if  let navigationController = segue.destinationViewController as? UINavigationController {
+                    if let tweetReply = navigationController.topViewController as? ReplyViewController {
+    
+                            let tweet = sender as! Tweet
+    
+                            //tweetReply.targetUserName = "@\(tweet.user?.screenname)"
+                            tweetReply.targetUserName = self.nameLabel.text!
+                            tweetReply.id = tweet.id!
+    
+                    }
+            }
     }
-    */
+    
 
 }

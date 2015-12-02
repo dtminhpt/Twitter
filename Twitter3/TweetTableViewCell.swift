@@ -68,4 +68,5 @@ class TweetTableViewCell: UITableViewCell {
     @IBAction func onReply(sender: AnyObject) {
         delegate?.tweetTableViewCell(self, replyTo: self.tweet!)
     }
+    
 }

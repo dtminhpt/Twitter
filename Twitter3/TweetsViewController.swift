@@ -12,6 +12,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
     var tweets: [Tweet]?
+    var temptweet: Tweet?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,11 +140,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
          if  let navigationController = segue.destinationViewController as? UINavigationController {
             if let tweetReply = navigationController.topViewController as? ReplyViewController {
               
-                let tweet = sender as! Tweet
+                //let tweet = sender as! Tweet
                 
-                tweetReply.targetUserName = "@\(tweet.user?.screenname)"
+                tweetReply.targetUserName = "@\(temptweet!.user?.screenname)"
                 
-                tweetReply.id = tweet.id!
+                tweetReply.id = temptweet!.id!
                
            }
         }
@@ -155,7 +156,8 @@ extension   TweetsViewController: TweetTableViewCellDelegate {
     //TweetTableViewCellDelegate
     func tweetTableViewCell(tweetTableViewCell: TweetTableViewCell, replyTo tweet: Tweet) {
         
-        self.performSegueWithIdentifier("TweetReply", sender: tweet)
+        temptweet = tweet
+        self.performSegueWithIdentifier("TweetReply", sender: temptweet)
         
     }
     

@@ -103,10 +103,8 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         
         
     @IBAction func onReply(sender: AnyObject) {
-          //let tweet = self.textView.text
             let status = self.textView.text
-            //let status = "Xin chao"
-            
+        
             print(countElements(status)())
             if (countElements(status)() == 0) {
                 return
