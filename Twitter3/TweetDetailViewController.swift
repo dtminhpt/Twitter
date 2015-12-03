@@ -52,6 +52,15 @@ class TweetDetailViewController: UIViewController {
     }
     
 
+    @IBAction func onReply(sender: AnyObject) {
+    }
+    
+    
+    @IBAction func onRetweet(sender: AnyObject) {
+    }
+    
+    @IBAction func onFavorite(sender: AnyObject) {
+    }
     
     // MARK: - Navigation
 
@@ -66,6 +75,7 @@ class TweetDetailViewController: UIViewController {
                             let tweet = sender as! Tweet
     
                             //tweetReply.targetUserName = "@\(tweet.user?.screenname)"
+                        
                             tweetReply.targetUserName = self.nameLabel.text!
                             tweetReply.id = tweet.id!
     

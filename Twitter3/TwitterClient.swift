@@ -102,7 +102,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             completion(tweet: tweet, error: nil)
             
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
-                print("error reweetting tweet update")
+                print("error retweetting tweet update")
                 print(error)
                 
                 completion(tweet: nil, error: error)
@@ -110,7 +110,7 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     }
     
     func unretweet(id: String, completion: (tweet: Tweet?, error: NSError?) -> ()) {
-        POST("1.1/statuses/reweet/\(id).json?include_my_request=1", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+        POST("1.1/statuses/retweet/\(id).json?include_my_request=1", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             let tweet = Tweet(dictionary: response as! NSDictionary)
             print("unretweet thanh cong")
@@ -118,11 +118,11 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             
             if
             let dic = response as? NSDictionary,
-            let current_user_reweet = dic["current_user_reweet"],
-            let reweet_id = current_user_reweet["id_str"]
+            let current_user_retweet = dic["current_user_retweet"],
+            let retweet_id = current_user_retweet["id_str"]
             {
                 //1.1/statuses/destroy/:id.json
-                TwitterClient.sharedInstance.POST("1.1/statuses/destroy/\(reweet_id!).json", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+                TwitterClient.sharedInstance.POST("1.1/statuses/destroy/\(retweet_id!).json", parameters: nil, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
                     
                     let tweet = Tweet(dictionary: response as! NSDictionary)
                     print("unretweet thanh cong")

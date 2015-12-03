@@ -140,7 +140,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             if let tweetReply = navigationController.topViewController as? ReplyViewController {
               
                 //let tweet = sender as! Tweet
-                tweetReply.targetUserName = "@" + (temptweet!.user?.screenname)!//"@\(temptweet!.user?.screenname)"
+                tweetReply.targetUserName = "@" + (temptweet!.user?.screenname)!
+                //"@\(temptweet!.user?.screenname)"
                 
                 tweetReply.id = temptweet!.id!
                
