@@ -18,9 +18,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var screennameLabel: UILabel!
    
     
-   // @IBOutlet weak var remainingCharacterLabel: UITextField!
-    
-    
+    @IBOutlet weak var tweetButton: UIBarButtonItem!
+   
+    // @IBOutlet weak var remainingCharacterLabel: UITextField!
     @IBOutlet weak var remainingcharactersBar: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -75,15 +75,18 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         //self.remainingCharacterLabel.text = "\(charactersRemaining)"
         self.remainingcharactersBar.title = "\(charactersRemaining)"
         
-        /*if charactersRemaining >= 0{
-            self.remainingCharacterLabel.textColor = UIColor.lightGrayColor()
-        } else {
-            self.remainingCharacterLabel.textColor = UIColor.redColor()
-        }*/
         
         //self.remainingCharacterLabel.textColor = charactersRemaining >= 0 ? UIColor.lightGrayColor() : UIColor.redColor()
-        self.remainingcharactersBar.tintColor =
-            charactersRemaining >= 0 ? UIColor.lightGrayColor() : UIColor.redColor()
+        
+        if charactersRemaining >= 0 {
+            self.remainingcharactersBar.tintColor =
+             UIColor.lightGrayColor()
+            self.tweetButton.enabled = true
+        } else {
+                self.remainingcharactersBar.tintColor =
+            UIColor.redColor()
+                self.tweetButton.enabled = false
+        }
         self.adjustScrollViewContentSize()
     }
     func adjustScrollViewContentSize() {
@@ -105,7 +108,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBAction func onTweetTap(sender: AnyObject) {
         //let tweet = self.textView.text
         let status = self.textView.text
-        //let status = "Xin chao"
+       
         
         print(countElements(status)())
         if (countElements(status)() == 0) {

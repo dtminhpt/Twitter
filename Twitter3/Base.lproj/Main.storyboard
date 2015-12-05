@@ -290,6 +290,7 @@
                         <outlet property="screennameLabel" destination="QSd-hP-958" id="wpm-Ua-3Tl"/>
                         <outlet property="scrollView" destination="HPm-nu-PD8" id="5uu-8R-17C"/>
                         <outlet property="textView" destination="uXu-he-3ge" id="D8w-Et-vFy"/>
+                        <outlet property="tweetButton" destination="QNd-er-Go3" id="LOk-Ek-Bu3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8O3-8E-YBO" userLabel="First Responder" sceneMemberID="firstResponder"/>
