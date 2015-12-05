@@ -49,6 +49,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    
+    @IBAction func onTap(sender: AnyObject) {
+        view.endEditing(true)
+    }
+    
     func loadTweets() {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         TwitterClient.sharedInstance.homeTimeLineWithParams(nil, completion: { (tweets, error) -> () in

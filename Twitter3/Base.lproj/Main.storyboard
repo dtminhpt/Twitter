@@ -158,6 +158,7 @@
                                                 <constraint firstItem="C3b-Z0-bFz" firstAttribute="trailing" secondItem="716-zg-9Pj" secondAttribute="trailing" constant="4" id="xQP-yI-vht"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <connections>
                                             <outlet property="favoriteButton" destination="djk-bl-LBG" id="mj2-ze-UOy"/>
@@ -169,6 +170,7 @@
                                             <outlet property="screennameLabel" destination="OzC-8u-zVc" id="sTU-Ta-po5"/>
                                             <outlet property="timeLabel" destination="C3b-Z0-bFz" id="pLi-HO-fpN"/>
                                             <outlet property="tweetTextLabel" destination="716-zg-9Pj" id="wcN-Xb-iQd"/>
+                                            <outletCollection property="gestureRecognizers" destination="e0b-bV-jty" appends="YES" id="9HB-dW-evw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -204,6 +206,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTu-6I-wHM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="e0b-bV-jty">
+                    <connections>
+                        <action selector="onTap:" destination="MzK-vk-ZcY" id="8oi-ay-3Td"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="903" y="295"/>
         </scene>
