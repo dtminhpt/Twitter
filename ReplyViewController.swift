@@ -58,8 +58,10 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
                 
                 self.view.frame = CGRectMake(0, 0, keyboardFrameEnd.size.width, keyboardFrameEnd.origin.y)
             }
+            
            
-            self.remainingcharactersBar.title = "\(MAX_CHARACTERS_ALLOWED)"
+            let targetUserNameLength = targetUserName.characters.count
+            self.remainingcharactersBar.title = "\(MAX_CHARACTERS_ALLOWED - targetUserNameLength)"
 
             self.textView.becomeFirstResponder()
             
