@@ -23,10 +23,12 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         @IBOutlet weak var nameLabel: UILabel!
         @IBOutlet weak var textView: UITextView!
         @IBOutlet weak var screennameLabel: UILabel!
-        //@IBOutlet weak var remainingCharacterLabel1: UILabel!
-        
-        @IBOutlet weak var remainingCharacterLabel: UITextField!
-        //@IBOutlet weak var remainingCharacterLabel: UITextField!
+    
+        @IBOutlet weak var remainingcharactersBar: UIBarButtonItem!
+    
+    
+        @IBOutlet weak var replyButton: UIBarButtonItem!
+    
         override func viewDidLoad() {
             super.viewDidLoad()
     
@@ -56,7 +58,9 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
                 
                 self.view.frame = CGRectMake(0, 0, keyboardFrameEnd.size.width, keyboardFrameEnd.origin.y)
             }
-            self.remainingCharacterLabel.text = "\(MAX_CHARACTERS_ALLOWED)"
+           
+            self.remainingcharactersBar.title = "\(MAX_CHARACTERS_ALLOWED)"
+
             self.textView.becomeFirstResponder()
             
         }
@@ -76,15 +80,28 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
             
             let charactersRemaining = MAX_CHARACTERS_ALLOWED - countElements(status)()
             
-            self.remainingCharacterLabel.text = "\(charactersRemaining)"
+           
+            self.remainingcharactersBar.title = "\(charactersRemaining)"
             
-            /*if charactersRemaining >= 0{
-            self.remainingCharacterLabel.textColor = UIColor.lightGrayColor()
+            if charactersRemaining >= 0 {
+                
+                self.remainingcharactersBar.tintColor =
+                    
+                    UIColor.lightGrayColor()
+                
+                self.replyButton.enabled = true
+                
             } else {
-            self.remainingCharacterLabel.textColor = UIColor.redColor()
-            }*/
+                
+                self.remainingcharactersBar.tintColor =
+                    
+                    UIColor.redColor()
+                
+                self.replyButton.enabled = false
+                
+            }
             
-            self.remainingCharacterLabel.textColor = charactersRemaining >= 0 ? UIColor.lightGrayColor() : UIColor.redColor()
+            
             self.adjustScrollViewContentSize()
         }
         func adjustScrollViewContentSize() {

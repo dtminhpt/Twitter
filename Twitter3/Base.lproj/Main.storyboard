@@ -505,20 +505,14 @@
                                     <action selector="onReply:" destination="hh3-c1-at8" id="EPH-8D-0zy"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="owt-Sn-HuN">
-                                <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="cpP-Ud-EaJ">
-                                    <rect key="frame" x="190" y="7" width="71" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                            </barButtonItem>
+                            <barButtonItem title="140" id="uom-ma-zgz"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="lA5-TX-9gf" id="wbp-3d-jXb"/>
                         <outlet property="profileImage" destination="ebd-nn-ijA" id="lfY-Tb-xyI"/>
-                        <outlet property="remainingCharacterLabel" destination="cpP-Ud-EaJ" id="MtD-E6-pan"/>
+                        <outlet property="remainingcharactersBar" destination="uom-ma-zgz" id="zZ9-yd-TBu"/>
+                        <outlet property="replyButton" destination="sS1-IM-vfD" id="EIt-yq-sRe"/>
                         <outlet property="screennameLabel" destination="Jqa-Or-6iD" id="8YO-oa-jmD"/>
                         <outlet property="scrollView" destination="MQE-ly-3Zi" id="Gfm-gB-27C"/>
                         <outlet property="textView" destination="Vrp-ey-KNd" id="zCz-Cm-P8f"/>
