@@ -16,9 +16,13 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var screennameLabel: UILabel!
-    @IBOutlet weak var remainingCharacterLabel1: UILabel!
+   
     
-    @IBOutlet weak var remainingCharacterLabel: UITextField!
+   // @IBOutlet weak var remainingCharacterLabel: UITextField!
+    
+    
+    @IBOutlet weak var remainingcharactersBar: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +50,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             
             self.view.frame = CGRectMake(0, 0, keyboardFrameEnd.size.width, keyboardFrameEnd.origin.y)
         }
-        self.remainingCharacterLabel.text = "\(MAX_CHARACTERS_ALLOWED)"
+       // self.remainingCharacterLabel.text = "\(MAX_CHARACTERS_ALLOWED)"
+        self.remainingcharactersBar.title =  "\(MAX_CHARACTERS_ALLOWED)"
+
         self.textView.becomeFirstResponder()
         
     }
@@ -66,7 +72,8 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         
         let charactersRemaining = MAX_CHARACTERS_ALLOWED - countElements(status)()
         
-        self.remainingCharacterLabel.text = "\(charactersRemaining)"
+        //self.remainingCharacterLabel.text = "\(charactersRemaining)"
+        self.remainingcharactersBar.title = "\(charactersRemaining)"
         
         /*if charactersRemaining >= 0{
             self.remainingCharacterLabel.textColor = UIColor.lightGrayColor()
@@ -74,7 +81,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
             self.remainingCharacterLabel.textColor = UIColor.redColor()
         }*/
         
-        self.remainingCharacterLabel.textColor = charactersRemaining >= 0 ? UIColor.lightGrayColor() : UIColor.redColor()
+        //self.remainingCharacterLabel.textColor = charactersRemaining >= 0 ? UIColor.lightGrayColor() : UIColor.redColor()
+        self.remainingcharactersBar.tintColor =
+            charactersRemaining >= 0 ? UIColor.lightGrayColor() : UIColor.redColor()
         self.adjustScrollViewContentSize()
     }
     func adjustScrollViewContentSize() {

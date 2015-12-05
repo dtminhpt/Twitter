@@ -280,20 +280,13 @@
                                     <action selector="onTweetTap:" destination="2Y3-21-yH7" id="BYV-NX-sPa"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem style="plain" id="YfZ-Zz-j3N">
-                                <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="PE0-A2-hB7">
-                                    <rect key="frame" x="186" y="7" width="71" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
-                            </barButtonItem>
+                            <barButtonItem title="140" id="cru-7e-O9C"/>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="UGE-qC-UKZ" id="wk8-Vj-KD7"/>
                         <outlet property="profileImage" destination="bIA-nL-bLM" id="syd-YM-hWY"/>
-                        <outlet property="remainingCharacterLabel" destination="PE0-A2-hB7" id="wWC-RJ-mom"/>
+                        <outlet property="remainingcharactersBar" destination="cru-7e-O9C" id="CAO-dM-9NG"/>
                         <outlet property="screennameLabel" destination="QSd-hP-958" id="wpm-Ua-3Tl"/>
                         <outlet property="scrollView" destination="HPm-nu-PD8" id="5uu-8R-17C"/>
                         <outlet property="textView" destination="uXu-he-3ge" id="D8w-Et-vFy"/>
