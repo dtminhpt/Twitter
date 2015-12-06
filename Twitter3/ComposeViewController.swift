@@ -56,18 +56,18 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         self.textView.becomeFirstResponder()
         
     }
+    
     override func viewDidLayoutSubviews() {
         self.adjustScrollViewContentSize()
     }
-    func countElements(str: String) () -> Int
-    {
+    
+    func countElements(str: String) () -> Int {
         return str.characters.count
     }
     
     
     
     func textViewDidChange(textView: UITextView) {
-
         let status = textView.text
         
         let charactersRemaining = MAX_CHARACTERS_ALLOWED - countElements(status)()
@@ -89,6 +89,7 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         }
         self.adjustScrollViewContentSize()
     }
+    
     func adjustScrollViewContentSize() {
         self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.textView.frame.origin.y + self.textView.frame.size.height)
     }
@@ -102,8 +103,6 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBAction func onCancelTap(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
     
     @IBAction func onTweetTap(sender: AnyObject) {
         //let tweet = self.textView.text

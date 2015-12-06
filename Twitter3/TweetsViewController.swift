@@ -9,7 +9,6 @@
 import UIKit
 
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
-
     @IBOutlet weak var tableView: UITableView!
     var tweets: [Tweet]?
     var temptweet: Tweet?
@@ -24,7 +23,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             let tweet = notification.object as! Tweet
             self.tweets?.insert(tweet, atIndex: 0)
             self.tableView.reloadData()
-            
         }
         loadTweets()
     }
@@ -44,7 +42,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
             TwitterClient.sharedInstance.homeTimeLineWithParams(nil, completion: { (tweets, error) -> () in
                 self.loadTweets()
-
             })
         }
     }
@@ -63,7 +60,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             self.tableView.pullToRefreshView.stopAnimating()
                 
             self.tableView.pullToRefreshView.hidden = false
-                
             }
             
             self.tweets = tweets
@@ -76,8 +72,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
                 return ()
             })
         })
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,7 +94,6 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         cell.tweet = self.tweets?[indexPath.row]
         cell.delegate = self
         return cell
-        
     }
     
     //Chon 1 row trong table -> hien thi chi tiet row do / goi viewcontroller khac bang lenh
@@ -112,23 +105,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
             controller.tweet = self.tweets![indexPath.row]
             self.navigationController?.pushViewController(controller, animated: true)
-        
     }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tweets?.count ?? 0
-        
     }
     
-   /* func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //return UITableViewAutomaticDimension
-    }
-    //Chinh do rong Row co dinh = 200
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 200
-    }*/
-   
     /*
     // MARK: - Navigation
 
@@ -140,31 +123,24 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     */
     
    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-   
          if  let navigationController = segue.destinationViewController as? UINavigationController {
             if let tweetReply = navigationController.topViewController as? ReplyViewController {
-              
                 //let tweet = sender as! Tweet
                 tweetReply.targetUserName = "@" + (temptweet!.user?.screenname)!
                 //"@\(temptweet!.user?.screenname)"
                 
                 tweetReply.id = temptweet!.id!
-               
            }
         }
     }
-    
 }
 
 extension   TweetsViewController: TweetTableViewCellDelegate {
     //TweetTableViewCellDelegate
     func tweetTableViewCell(tweetTableViewCell: TweetTableViewCell, replyTo tweet: Tweet) {
-        
         temptweet = tweet
         self.performSegueWithIdentifier("TweetReply", sender: temptweet)
-        
     }
-    
 }
 
 /*extension TweetsViewController:ReplyViewControllerDelegate {

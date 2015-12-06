@@ -9,7 +9,6 @@
 import UIKit
 
 class Tweet: NSObject {
-    
     var user: User?
     var text: String?
     var createdAtString: String?
@@ -47,7 +46,6 @@ class Tweet: NSObject {
         self.numberOfRetweets = dictionary["retweet_count"] as? Int
         self.favorited = dictionary["favorited"] as! Bool
         self.retweeted = dictionary["favorited"] as! Bool
-        
     }
     
     class func tweetsWithArray(array: [NSDictionary]) -> [Tweet] {

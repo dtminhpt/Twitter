@@ -13,8 +13,6 @@ protocol TweetTableViewCellDelegate {
 
 
 class TweetTableViewCell: UITableViewCell {
-
-    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screennameLabel: UILabel!
@@ -56,23 +54,25 @@ class TweetTableViewCell: UITableViewCell {
         if tweet.isRetweeted {
             self.retweetName.text = "\(tweet.retweetName!) reweeted"
         } else {
-            
+            //do nothing
         }
         
         self.retweetButton.enabled = tweet.user?.screenname! != User.currentUser!.screenname
         //self.updateImage()
-        
-        
+        self.updateImageRetweet()
     }
     
     func updateImage() {
         self.favoriteButton.setImage(UIImage(named: tweet!.favorited ? "like-action-on" : "like-action"), forState: UIControlState.Normal)
         self.retweetButton.setImage(UIImage(named: tweet!.retweeted ? "retweet-action-on" : "retweet-action"), forState: UIControlState.Normal)
        }
+    
     func updateImageRetweet() {
-        
-        self.retweetButton.setImage(UIImage(named: tweet!.retweeted ? "retweet-action-on" : "retweet-action"), forState: UIControlState.Normal)
+        if self.tweet?.retweeted == true  {
+            self.retweetButton.setImage(UIImage(named: tweet!.retweeted ? "retweet-action-on" : "retweet-action"), forState: UIControlState.Normal)
+        }
     }
+    
     func updateImageFavorite() {
         self.favoriteButton.setImage(UIImage(named: tweet!.favorited ? "like-action-on" : "like-action"), forState: UIControlState.Normal)
         
@@ -97,9 +97,7 @@ class TweetTableViewCell: UITableViewCell {
     }
     
     
-    
     @IBAction func onRetweet(sender: AnyObject) {
-        
         //let tweet = Tweet(dictionary: response as! NSDictionary)
         if let tweet = tweet {
             print(tweet.id!)
@@ -109,9 +107,10 @@ class TweetTableViewCell: UITableViewCell {
             TwitterClient.sharedInstance.retweet(tweet.id!) { (tweet, error) -> () in
                 if error == nil {
                     //let dic = Dictionary(tweet: Tweet as! Tweet)
-                    self.updateImageRetweet()
+                    
                     self.tweet?.updateFromDic(tweet!)
                     self.updateUI(self.tweet!)
+                    self.updateImageRetweet()
                     
                     //self.retweetName.text = "\(tweet!.retweetName!) reweeted"
                 }
@@ -121,7 +120,6 @@ class TweetTableViewCell: UITableViewCell {
             TwitterClient.sharedInstance.unretweet(tweet!.id!) { (tweet, error) -> () in
                 if error == nil {
                     //let dic = Dictionary(tweet: Tweet as! Tweet)
-                    self.updateImageRetweet()
 
                     self.tweet?.updateFromDic(tweet!)
                     //self.updateUI(tweet!)
@@ -131,9 +129,8 @@ class TweetTableViewCell: UITableViewCell {
                     }
                     self.tweet?.retweeted = false
                     self.updateUI(self.tweet!)
-                    
-                    
-                }
+                    self.updateImageRetweet()
+               }
             }
         }
     }
@@ -166,6 +163,5 @@ class TweetTableViewCell: UITableViewCell {
             }
             
         }
-
     }
 }

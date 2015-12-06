@@ -63,22 +63,15 @@ class User: NSObject {
             
             if _currentUser != nil {
                 do{
-                    
                     let data = try NSJSONSerialization.dataWithJSONObject(user!.dictionary, options: [])
                     NSUserDefaults.standardUserDefaults().setObject(data, forKey: currentUserKey)
-
-
                 } catch {
                     print("json object with data error")
                 }
-              
-                    
             } else {
                 NSUserDefaults.standardUserDefaults().setObject(nil, forKey: currentUserKey)
             }
             NSUserDefaults.standardUserDefaults().synchronize()            
         }
     }
-
-
 }

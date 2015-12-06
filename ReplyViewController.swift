@@ -64,20 +64,19 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
             self.remainingcharactersBar.title = "\(MAX_CHARACTERS_ALLOWED - targetUserNameLength)"
 
             self.textView.becomeFirstResponder()
-            
         }
+    
         override func viewDidLayoutSubviews() {
             self.adjustScrollViewContentSize()
         }
-        func countElements(str: String) () -> Int
-        {
+    
+        func countElements(str: String) () -> Int{
             return str.characters.count
         }
         
         
         
         func textViewDidChange(textView: UITextView) {
-            
             let status = textView.text
             
             let charactersRemaining = MAX_CHARACTERS_ALLOWED - countElements(status)()
@@ -85,27 +84,24 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
            
             self.remainingcharactersBar.title = "\(charactersRemaining)"
             
-            if charactersRemaining >= 0 {
-                
+            if charactersRemaining >= 0 {                
                 self.remainingcharactersBar.tintColor =
                     
                     UIColor.lightGrayColor()
                 
                 self.replyButton.enabled = true
-                
             } else {
-                
                 self.remainingcharactersBar.tintColor =
                     
                     UIColor.redColor()
                 
                 self.replyButton.enabled = false
-                
             }
             
             
             self.adjustScrollViewContentSize()
         }
+    
         func adjustScrollViewContentSize() {
             self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.textView.frame.origin.y + self.textView.frame.size.height)
         }
@@ -152,5 +148,4 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         // Pass the selected object to the new view controller.
         }
         */
-
 }

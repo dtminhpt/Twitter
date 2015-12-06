@@ -20,13 +20,10 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     
     class var sharedInstance: TwitterClient {
         struct Static {
-            
-            static let instance = TwitterClient(baseURL: twitterBaseURL, consumerKey: twitterConsumerKey, consumerSecret: twitterConsumerSecret)
-            
+           static let instance = TwitterClient(baseURL: twitterBaseURL, consumerKey: twitterConsumerKey, consumerSecret: twitterConsumerSecret)
         }
        
         return Static.instance
-        
     }
     func loginWithCompletion(completion: (user: User?, error: NSError?) -> ()) {
         loginCompletion = completion
@@ -46,11 +43,9 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 
                 print("Failed to get the request token")
                 self.loginCompletion?(user: nil, error: error)
-                
         }
-        
-        
     }
+    
     func homeTimeLineWithParams(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         GET("1.1/statuses/home_timeline.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
@@ -59,33 +54,32 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             
                 completion(tweets: tweets, error: nil)
-            
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("error getting home timeline")
                     
                 completion(tweets: nil, error: error)
          })
     }
+    
     func postTweetUpdateWithParams(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
         POST("1.1/statuses/update.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             let tweet = Tweet(dictionary: response as! NSDictionary)
             print("post tweet thanh cong")
             completion(tweet: tweet, error: nil)
-            
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("error posting tweet update")
                 
                 completion(tweet: nil, error: error)
         })
     }
+    
     func replyTweetUpdateWithParams(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
         POST("1.1/statuses/update.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             let tweet = Tweet(dictionary: response as! NSDictionary)
             print("reply tweet thanh cong")
             completion(tweet: tweet, error: nil)
-            
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("error posting tweet update")
                 
@@ -100,7 +94,6 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
             let tweet = Tweet(dictionary: response as! NSDictionary)
             print("retweet thanh cong")
             completion(tweet: tweet, error: nil)
-            
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("error retweetting tweet update")
                 print(error)
@@ -141,16 +134,15 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 completion(tweet: nil, error: error)
         })
     }
+    
 
     func favorite(id: String, completion: (tweet: Tweet?, error: NSError?) -> ()) {
-        
         let params = ["id": id]
         POST("1.1/favorites/create.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             let tweet = Tweet(dictionary: response as! NSDictionary)
             print("favorite thanh cong")
             completion(tweet: tweet, error: nil)
-            
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("error favorating tweet update")
                 
@@ -159,14 +151,12 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     }
     
     func unfavorite(id: String, completion: (tweet: Tweet?, error: NSError?) -> ()) {
-        
         let params = ["id": id]
         POST("1.1/favorites/destroy.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
             
             let tweet = Tweet(dictionary: response as! NSDictionary)
             print("unfavorite thanh cong")
             completion(tweet: tweet, error: nil)
-            
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                 print("error unfavorating tweet update")
                 print(error)
@@ -177,7 +167,6 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
 
 
     func openURL(url: NSURL) {
-        
             fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query) , success: { (accessToken: BDBOAuth1Credential!) -> Void in
             print("Got the access token!")
                 
@@ -189,18 +178,13 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
                 print("user: \(user.name)")
                 User.currentUser = user
                 self.loginCompletion?(user: user, error: nil)
-                
                 }, failure: { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
                     print("error getting current user")
                     self.loginCompletion?(user: nil, error: error)
             })
-            
-             
             }) { (error: NSError!) -> Void in
                 print("Failed to receive access token")
                 self.loginCompletion?(user: nil, error: error)
         }
-        
     }
-
  }

@@ -9,7 +9,6 @@
 import UIKit
 
 class TweetDetailViewController: UIViewController {
-
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var screennameLabel: UILabel!
@@ -71,17 +70,14 @@ class TweetDetailViewController: UIViewController {
     
                 if  let navigationController = segue.destinationViewController as? UINavigationController {
                     if let tweetReply = navigationController.topViewController as? ReplyViewController {
-    
                             let tweet = sender as! Tweet
     
                             //tweetReply.targetUserName = "@\(tweet.user?.screenname)"
                         
                             tweetReply.targetUserName = self.nameLabel.text!
-                            tweetReply.id = tweet.id!
-    
+                            tweetReply.id = tweet.id!    
                     }
             }
     }
-    
 
 }
