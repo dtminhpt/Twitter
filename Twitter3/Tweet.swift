@@ -23,29 +23,41 @@ class Tweet: NSObject {
     var favorited: Bool = false
     var retweeted: Bool = false
     
+    
     init(dictionary: NSDictionary) {
+        var dic = dictionary
+        
         if dictionary["reweeted_status"] != nil {
-            let retweetUser = User(dictionary: dictionary["user"] as! NSDictionary)
+            //let retweetUser = User(dictionary: dictionary["user"] as! NSDictionary)
+            let retweetUser = User(dictionary: dic["user"] as! NSDictionary)
             self.retweetName = retweetUser.name
             
-            // var dic = dictionary["retweeted_status"] as! NSDictionary
+            var dic = dictionary["retweeted_status"] as! NSDictionary
             self.isRetweeted = true
         }
 
-        user = User(dictionary: dictionary["user"] as! NSDictionary)
-        text = dictionary["text"] as? String
-        createdAtString = dictionary["created_at"] as? String
-        id = dictionary["id_str"] as? String
+        //user = User(dictionary: dictionary["user"] as! NSDictionary)
+        user = User(dictionary: dic["user"] as! NSDictionary)
+        //text = dictionary["text"] as? String
+        text = dic["text"] as? String
+        //createdAtString = dictionary["created_at"] as? String
+        createdAtString = dic["created_at"] as? String
+        //id = dictionary["id_str"] as? String
+        id = dic["id_str"] as? String
       
         
         let formatter = NSDateFormatter()
         formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"
         createdAt = formatter.dateFromString(createdAtString!)
         
-        self.numberOfFavorites = dictionary["favorite_count"] as? Int
-        self.numberOfRetweets = dictionary["retweet_count"] as? Int
-        self.favorited = dictionary["favorited"] as! Bool
-        self.retweeted = dictionary["favorited"] as! Bool
+        //self.numberOfFavorites = dictionary["favorite_count"] as? Int
+        self.numberOfFavorites = dic["favorite_count"] as? Int
+        //self.numberOfRetweets = dictionary["retweet_count"] as? Int
+        self.numberOfRetweets = dic["retweet_count"] as? Int
+        //self.favorited = dictionary["favorited"] as! Bool
+        self.favorited = dic["favorited"] as! Bool
+        //self.retweeted = dictionary["favorited"] as! Bool
+        self.retweeted = dic["favorited"] as! Bool
     }
     
     class func tweetsWithArray(array: [NSDictionary]) -> [Tweet] {

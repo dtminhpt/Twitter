@@ -42,7 +42,7 @@ class TweetDetailViewController: UIViewController {
         self.retweetNumberLabel.text = "\((self.tweet!.numberOfRetweets)!)"
         self.favoriteNumberLabel.text = "\((self.tweet!.numberOfFavorites)!)"
         
-        print("So reweet\(self.tweet?.numberOfRetweets)")
+        print("So reweet\(self.tweet?.numberOfRetweets)- Details 1 cell")
     }
 
     override func didReceiveMemoryWarning() {
