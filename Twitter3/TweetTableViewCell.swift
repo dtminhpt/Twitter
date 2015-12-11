@@ -45,6 +45,8 @@ class TweetTableViewCell: UITableViewCell {
 
         }
     }
+    
+    
    // var tweet: Tweet?
     func updateUI(tweet: Tweet) {
         self.tweet = tweet
