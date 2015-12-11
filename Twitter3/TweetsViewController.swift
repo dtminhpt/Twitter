@@ -94,10 +94,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     
-    //Dismiss editing
-    @IBAction func onTap(sender: AnyObject) {
-        view.endEditing(true)
-    }
+    
     
     func loadTweets(maxId: String = "") {
         var params: NSDictionary = NSDictionary()
